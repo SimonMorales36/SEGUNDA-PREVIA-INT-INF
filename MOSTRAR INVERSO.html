@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script >
+        
+        function mostrar_inverso (lista)    {
+            if(lista.length == 0)   {
+                return;
+            }
+            else    {
+                const [first,... rest] = lista;
+                mostrar_inverso(rest);
+                document.write (first);
+            }
+        }
+
+        mostrar_inverso([1, 2, 3, 4, ,5])
+    </script>
+  </body>
+</html>
