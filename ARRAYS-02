@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Arrays-02</title>
+	<meta charset="UTF-8"/>
+</head>
+
+<body>
+
+<script>
+
+//////////////////////////////////////
+// ARREGLOS EN JAVASCRIPT - PARTE I //
+//////////////////////////////////////
+
+// Función para imprimir texto en la pantalla
+function texto( cadena, lineas_post = 0 ) {
+  if (typeof(cadena) == "string") {
+    if (cadena.indexOf("(::)") == 0) {
+      document.write("===========================================================<br>");
+    }
+  }
+  document.write( cadena );
+  for (var i = 0; i < lineas_post; i++) {
+    document.write("<br>");
+  }
+}
+
+function tabla( arr ) {
+	for (var i = 0; i < arr.length; i++) {
+		for (var j = 0; j < arr[i].length; j++) {
+			texto( arr[i][j] + " -- ");
+		}
+		texto("", 1);
+	}
+}
+
+texto("(::) TALLER SOBRE MANEJO INTEGRAL DE ARRAYS EN JAVASCRIPT - PARTE 2", 2);
+
+texto("(::) DEFINICIÓN Y USO DE ARREGLOS EN DOS DIMENSIONES", 2);
+
+var arreglo1 = ["Juan", 24, 18000];		// Fila 0
+
+// Juan : Columna 0, 24 : Columna 1, 18000 : Columna 2
+
+// Juan está en: [Fila 0][Columna 0]
+
+// Correctamente escrito: Juan está en: [0][0]
+
+// 24 está en: [0][1]
+// 18000 está en: [0][2]
+
+var arreglo2 = ["Ana", 30, 30000];		// Fila 1
+var arreglo3 = ["Teresa", 28, 41000];	// Fila 2
+var arreglo4 = ["Carlos", 31, 28000];	// Fila 3
+var arreglo5 = ["Antonio", 29, 35000];	// Fila 4
+
+var salario = [arreglo1, arreglo2, arreglo3, arreglo4, arreglo5];
+
+var notas = [
+
+	['Juan', 4],
+	['Sofía', 5],
+	['Carlos', 3],
+	['Alberto', 5],
+	['María', 5]
+
+];
+
+/////////////////////////////////////////////////////////////////////
+
+texto("(-) EJEMPLO: Acceder al arreglo3 en la posición 1 = " + salario[2][1], 2);
+texto("(-) A) Cada variable definida con el nombre antecedente: 'arreglo'", 1);
+texto("(-) es un array. Y dicho array se coloca dentro de otro array (salario)", 2);
+
+texto("(-) B) No olvidar que todos los valores en los array", 1);
+texto("(-) se cuentan empezando en 0. Es decir, 0, 1, 2, etcétera", 2);
+
+texto("(-) C) El arreglo 3 fue colocado en la fila 2. Este valor se", 1);
+texto("(-) obtiene al ver que arreglo1 se colocó en la fila 0, ", 1);
+texto("(-) arreglo2 se colocó en la fila 1, y arreglo 3", 1);
+texto("(-) se colocó en la fila 2. Por eso se tiene: salario[2]", 2);
+
+texto("(-) D) Al decir que se accede al arreglo 3 en la posición 1,", 1);
+texto("(-) estamos hablando de acceder a una columna. Y como las columnas ", 1);
+texto("(-) están numeradas empezando en 0, se tiene: posición 0 sería", 1);
+texto("(-) la columna cero, y posición 1 sería la columna 1. Entonces:", 2);
+
+texto("(-) arreglo3 en la posición 1 equivale a: salario[2][1]", 2);
+
+//////////////////////////////////////////////////////////////////////
+
+texto("(::) IMPRIMIENDO UN ARREGLO EN DOS DIMENSIONES", 2);
+
+// Este ciclo es para las filas
+for (var fila = 0; fila < salario.length; fila++) {
+
+    // Este ciclo es para las columnas
+    for (var columna = 0; columna < salario[fila].length; columna++) {
+
+        // Aquí se accede a cada elemento del array
+        texto( salario[fila][columna] + " --- " );
+
+    }
+    texto("", 1);
+}
+
+texto("(::) AGREGANDO ELEMENTOS", 2);
+
+texto("(-) Agregando un elemento al final:", 1);
+texto("(-) salario.push(['Julio', 32, 35000]); ", 2);
+
+salario.push(['Julio', 32, 35000]);
+
+texto("(::) ELIMINANDO ELEMENTOS", 2);
+texto("(-) Eliminando el elemento final:", 1);
+texto("(-) salario.pop();", 2);
+
+salario.pop();
+
+texto("(::) FUNCIONES GENERALES", 2);
+texto("(-) Javascript no posee manejo de arreglos bidimensionales", 1);
+texto("(-) de manera similar al manejo unidimensional", 1);
+texto("(-) Por este motivo, se deben crear funciones según se requiera", 2);
+
+////////////////////////////////////////////////////////////////////7
+
+texto("(::) O B J E T O S", 2);
+
+// Un objeto se define en Javascript utilizando una función
+
+// El siguiente objeto es un punto, con sus coordenadas (x, y)
+// en el plano cartesiano
+
+// Los nombres de los objetos tienen la primera letra en mayúscula
+// (esto es una convención, no es obligatorio)
+
+// Todos los objetos poseen en su interior datos y otras funciones
+// denominados métodos
+
+// Para el caso inicial que nos ocupa, únicamente utilizaremos dos datos:
+// La coordenada x
+// La coordenada y
+
+function Punto(x,y) {
+	// Explicación: this.x es el nombre de las variables dentro del objeto
+	//
+	// Los nombres de todas las variables internas de un objeto deben
+	// poseer la frase: this.
+
+	this.x = x;
+	this.y = y;
+}
+
+// Se crean cuatro puntos
+var p1 = new Punto(1,2);
+var p2 = new Punto(3,5);
+var p3 = new Punto(2,8);
+var p4 = new Punto(4,4);
+
+// Los cuatro puntos se colocan dentro de un array
+// (Ver la imagen que se anexa en Classroom)
+var puntos = [p1,p2,p3,p4];
+
+// Se muestran los cuatro puntos
+// NOTA: un poco más abajo se escribe una función general para mostrar puntos
+for (var i = 0; i < puntos.length; ++i) {
+	texto("Punto " + parseInt(i+1) + " = " + puntos[i].x + ", " +
+	puntos[i].y, 1);
+}
+
+texto("", 1); 
+
+// La función: dibujarPuntos, presenta los puntos contenidos
+// en un array (el cual está conformado por puntos)
+function dibujarPuntos(arr) {
+	// Se recorren todos los puntos contenidos en el arreglo recibido
+	for (var i = 0; i < arr.length; ++i) {
+		// Se muestra el punto iésimo en la pantalla
+		texto("Punto " + parseInt(i+1) + "= " + arr[i].x + ", " + arr[i].y, 1);
+	}
+}
+
+// Se agrega un nuevo punto, al final del arreglo 'puntos'
+
+// Se define el nuevo punto. El punto es p5 con la coordenada (12, -3)
+var p5 = new Punto(12,-3);
+
+// Agrega el punto p5 al final del arreglo
+puntos.push(p5);
+
+texto("Después de agregar el punto (12, -3) ", 2);
+
+// Se muestran todos los puntos en la pantalla de la computadora
+// En el array ya se incluye el último punto adicionado
+dibujarPuntos(puntos);
+
+texto("", 1);
+
+// Con esta instrucción se elimina el primer elemento del arreglo 'puntos'
+puntos.shift();
+
+texto("Después de extraer el primero ", 2);
+
+// Se muestra el array con el punto eliminado
+dibujarPuntos(puntos);
+
+</script>
+</body>
+
+</html>
