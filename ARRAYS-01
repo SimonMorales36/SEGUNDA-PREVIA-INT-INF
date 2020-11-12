@@ -1,0 +1,653 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+</head>
+
+<body>
+
+<script>
+
+//////////////////////////////////////
+// ARREGLOS EN JAVASCRIPT - PARTE I //
+//////////////////////////////////////
+
+// Función para imprimir texto en la pantalla
+function texto( cadena, lineas_post = 0 ) {
+  if (typeof(cadena) == "string") {
+    if (cadena.indexOf("(::)") == 0) {
+      document.write("===========================================================<br>");
+    }
+  }
+  document.write( cadena );
+  for (var i = 0; i < lineas_post; i++) {
+    document.write("<br>");
+  }
+}
+
+texto("(::) TALLER SOBRE MANEJO INTEGRAL DE ARRAYS EN JAVASCRIPT", 2);
+
+//////////////////////////////////
+// Asignando valores a un array //
+//////////////////////////////////
+
+// Definiendo un array vacío
+var numeros = [];
+
+// Asignando valores a cada posición del array, mediante un ciclo
+for (var i = 0; i < 100; ++i) {
+  numeros[i] = i+1;
+}
+
+// Mostrando el array en la pantalla
+texto("(::) Array con los números desde el 1 hasta el 100", 2)
+for (var i = 0; i < 100; i++) {
+  texto(numeros[i] + "-");
+}
+
+//////////////////////////////////////////////////
+// Acceso a cada elemento individual del array. //
+// Luego, se suman los elementos                //
+//////////////////////////////////////////////////
+
+var numeros = [1,2,3,4,5];
+
+var suma = numeros[0] + numeros[1] + numeros[2] + numeros[3] + numeros[4];
+
+texto("", 2);
+texto("(::) Suma manual de los elementos del array: " + numeros, 2)
+texto("Suma = " + suma, 2);
+
+/////////////////////////////////////
+// Suma de los elementos del array //
+// Utilizando un ciclo             //
+/////////////////////////////////////
+
+var numeros = [1,2,3,5,8,13,21];
+
+var suma = 0;
+
+for (var i = 0; i < numeros.length; ++i)
+{
+  suma += numeros[i];
+}
+
+texto("(::) Suma de elementos del array: " + numeros + " utilizando ciclos", 2);
+texto("Suma = " + suma, 2);
+
+/////////////////////////////////
+// Diviendo un array en partes //
+/////////////////////////////////
+
+var frase = "la programación orientada a objetos en javascript";
+
+var palabras = frase.split(" ");
+
+texto("(::) Se divide una frase en palabras. La frase es = '" + frase + "'", 2);
+for (var i = 0; i < palabras.length; ++i)
+{
+  texto("Palabra: " + i + ": " + palabras[i], 1);
+}
+
+texto("", 1);
+
+///////////////////////////////////////////////
+// La asignación simple de arrays no produce //
+// dos arrays diferentes. Ambos señalan a la //
+// misma zona de memoria                     //
+///////////////////////////////////////////////
+
+var numeros = [];
+
+for (var i = 0; i < 10; ++i)
+{
+  numeros[i] = i + 1;
+}
+
+// Los array numeros y copia_numeros, son en realidad el mismo array
+var copia_numeros = numeros;
+
+numeros[0] = 400;
+
+texto("(::) Al cambiar la posición cero de 'numeros', también se cambia la posición 0 de 'copia_numeros'", 2);
+
+texto("(-) numeros[0] = " + numeros[0], 1);
+texto("(-) copia_numeros[0] = " + copia_numeros[0], 2)
+
+///////////////////////////////////////////
+// Se utiliza una funciónj de copia para //
+// que los dos arrays sean diferentes    //
+///////////////////////////////////////////
+
+function copiar(arr1, arr2) {
+  for (var i = 0; i < arr1.length; ++i) {
+    arr2[i] = arr1[i];
+  }
+}
+
+var numeros = [];
+for (var i = 0; i < 100; ++i) {
+numeros[i] = i+1;
+}
+var copia_numeros = [];
+
+// Se copia el array numeros en copia_numeros
+copiar(numeros, copia_numeros);
+
+numeros[0] = 400;
+
+texto("(::) Se verifica que al cambiar la posición cero en numeros: ", 1);
+texto("NO se cambia la posición cero en el array copia_numeros", 2);
+
+texto("(-) numeros[0] = " + numeros[0], 1);
+texto("(-) copia_numeros[0] = " + copia_numeros[0], 2);
+
+/////////////////////////////////////////////////////
+// Se muestra aquí como buscar un dato en un array //
+/////////////////////////////////////////////////////
+
+var nombres = ["David", "Sofía", "Ramón", "Carlos", "María"];
+texto("(::) Lista de nombres = ", 1);
+texto("(-) " + nombres, 2);
+
+nombre = "Ramón";
+
+texto("(-) Se está buscando el nombre: Ramón", 1);
+
+var posicion = nombres.indexOf(nombre);
+
+if (posicion >= 0) {
+  texto("(-) Encontrado " + nombre + " en la posición " + posicion, 2);
+}
+else {
+  texto("(-) " + nombre + " no encontrado en el array.", 2);
+}
+
+//////////////////////////////////////////////////////
+// Buscando el primero y el último de los elementos //
+//////////////////////////////////////////////////////
+
+var nombres = ["David", "Miguel", "Sofía", "Miguel", "Teresa", "Miguel", "Ramón", "Carlos", "Miguel", "María"];
+
+texto("(::) Se busca un nombre en la lista = ", 1);
+texto("(-) " + nombres, 2);
+
+var nombre = "Miguel";
+
+texto("(-) El nombre a buscar es: " + nombre, 1);
+
+var primeraPosicion = nombres.indexOf(nombre);
+
+texto("(-) Encontrado " + nombre + " en la primera posición = " + primeraPosicion, 1);
+
+var ultimaPosicion = nombres.lastIndexOf(nombre);
+
+texto("(-) Encontrado " + nombre + " en la última posición = " + ultimaPosicion, 2);
+
+////////////////////////////////////////////////////
+// Unión de elementos de un array utilizando join //
+////////////////////////////////////////////////////
+
+var nombres = ["David", "Sofía", "Ramón", "Carlos", "Miguel", "María"];
+
+var nombres_union = nombres.join();
+
+texto("(::) Unión de un array utilizando join. Todos sus elementos se unen en una sola cadena: ", 2)
+texto(nombres_union, 2)
+
+//////////////////////////////////////////////////////////////////
+// Mostrar un array utilizando directamente el nombre del Array //
+// Se utiliza el método: toString()                             //
+//////////////////////////////////////////////////////////////////
+
+nombres_union = nombres.toString();
+texto("(::) Utilización del método toString para obtener el string equivalente de un array", 2);
+texto(nombres_union, 2);
+
+////////////////////////////////////////////////
+// Concatenacion de los elementos de un array //
+////////////////////////////////////////////////
+
+var cadena_1 = ["Miguel", "Carlos", "Antonio", "Daniel", "María"];
+var cadena_2 = ["Ramón", "Sofía", "Bernardo"];
+
+texto("(::) Concatenación de arrays utilizando concat",  2);
+
+texto("(-) Primer array  = " + cadena_1, 1);
+texto("(-) Segundo array = " + cadena_2, 2);
+
+texto("(-) Primera forma de concatenacion. cadena_2 se concatena a cadena_1", 1);
+var concatenacion = cadena_1.concat(cadena_2);
+texto("(-) " + concatenacion, 2);
+
+concatenacion = cadena_2.concat(cadena_1);
+
+texto("(-) Segunda forma de concatenacion. cadena_1 se concatena a cadena_2", 1);
+texto("(-) " + concatenacion, 2);
+
+//////////////////////////////////////////
+// Utilización de la instrucción: split //
+//////////////////////////////////////////
+
+var concatenacion = ["Miguel","Carlos","Antonio","Ramón","Sofía","Daniel","María"];
+
+texto("(::) Ilustración del método de división por partes utilizando splice", 2)
+texto("(-) El array original = " + concatenacion, 1);
+
+// Extrae una parte del array y la coloca en 'unaParte'
+var unaParte = concatenacion.splice(3,3);
+
+// En concatenacion queda el excedente, al cual se le denomina 'otraParte'
+var otraParte = concatenacion;
+
+
+texto("(-) Una parte splice(3,3) = " + unaParte, 1); // Ramón,Sofía,Daniel
+texto("(-) Otra parte (lo que sobra) = " + otraParte, 2); // Miguel,Carlos,Antonio,María
+
+//////////////////////////////////////////////
+// Agregando elementos al final de un array //
+//////////////////////////////////////////////
+
+var numeros = [1,2,3,4,5];
+texto("(::) Agregando elementos a un array (al final)", 2)
+texto("(-) Array antes de agregar un elemento al final: " + numeros, 1); // 1,2,3,4,5
+numeros.push(6);
+texto("(-) Array después de agregar el elemento: " + numeros, 2); // 1,2,3,4,5,6
+
+/////////////////////////////////////////////////
+// Agregando elementos al comienzo de un array //
+// Método manual ineficiente                   //
+/////////////////////////////////////////////////
+
+var numeros = [2,3,4,5];
+
+texto("(::) Agregando nuevo número al comienzo del array (método ineficiente)", 2);
+texto("(-) Array inicial: " + numeros, 1);
+
+var nuevo_numero = 1;
+var N = numeros.length;
+for (var i = N; i >= 0; --i) {
+numeros[i] = numeros[i-1];
+}
+numeros[0] = nuevo_numero;
+
+texto("(-) Adición del valor 1 al comienzo del array. Números = " + numeros, 2); // 1,2,3,4,5
+
+///////////////////////////////////////////
+// Agregando datos al comienzo del array //
+// Método más eficiente: uhshift         //
+///////////////////////////////////////////
+
+texto("(::) Agregando elementos al comienzo de un array. Utlización de unshift", 2);
+
+var numeros = [2,3,4,5];
+texto("(-) Números inicial = " + numeros, 1); // 2,3,4,5
+
+var nuevo_numero = 1;
+numeros.unshift(nuevo_numero);
+texto("(-) Agregado el 1: " + numeros, 2); // 1,2,3,4,5
+
+numeros = [3,4,5];
+
+texto("(-) Números inicial = " + numeros, 1); // 3,4,5
+
+numeros.unshift(1,2);
+texto("(-) Agregados dos valores, el 1 y el 2. Nuevo array = " + numeros, 2); // 1,2,3,4,5
+
+////////////////////////////////////////////////
+// Eliminando elementos del final de un array //
+// Instrucción pop()                          //
+////////////////////////////////////////////////
+
+var numeros = [1,2,3,4,5,9];
+texto("(::) Removiendo un dato al final del array", 2);
+
+texto("(-) Array original = " + numeros, 1);
+
+numeros.pop();
+texto("(-) Array sin el último elemento: " + numeros, 2); // 1,2,3,4,5
+
+/////////////////////////////////////////////
+// Removiendo datos del inicio de un array //
+// Instrucción: shift                      //
+/////////////////////////////////////////////
+
+var numeros = [9,1,2,3,4,5];
+texto("(::) Removiendo elementos del comienzo de un array. Se utiliza 'unshift'", 2);
+
+texto("(-) Valor original de Números = " + numeros, 1);
+numeros.shift();
+texto("(-) Se elimina el primer elemento del array: " + numeros, 2); // 1,2,3,4,5
+
+//////////////////////////////////////////
+// Agregando datos en medio de un array //
+//////////////////////////////////////////
+
+var numeros = [1,2,3,7,8,9];
+
+texto("(::) Agregando elementos en la mitad de un array. ", 2);
+texto("(-) Array Números (antes) = " + numeros, 1); // 1,2,3,7,8,9
+
+var nuevos_elementos = [4,5,6];
+numeros.splice(3,0,nuevos_elementos);
+
+texto("(-) Números (después). Se agrega [4,5,6] a partir de la tercera posición = " + numeros, 2); // 1,2,3,4,5,6,7,8,9
+
+// Una variante. Se agregan directamente los elementos
+var numeros = [1,2,3,7,8,9];
+
+texto("(::) Agregando elementos en la mitad de un array. Método directo, agregando los valores en la instrucción: ", 2);
+texto("(-) Números (antes) = " + numeros, 1); // 1,2,3,7,8,9
+
+numeros.splice(3,0,4,5,6);
+
+texto("(-) Números (después) = " + numeros, 2); // 1,2,3,4,5,6,7,8,9
+
+///////////////////////////////////////////
+// Eliminando datos en medio de un array //
+///////////////////////////////////////////
+
+var numeros = [1,2,3,100,200,300,400,4,5];
+
+texto("(::) Eliminando elementos en la mitad de un array. Se utiliza splice, según se aprecia en la instrucción", 2);
+texto("(-) Números (antes) = " + numeros, 1); // 1,2,3,100,200,300,400,4,5
+
+numeros.splice(3,4);
+
+texto("(-) Números (después) = " + numeros, 2); // 1,2,3,4,5
+
+////////////////////////
+// Invirtiendo arrays //
+////////////////////////
+
+var numeros = [1,2,3,4,5];
+texto("(::) Invirtiendo arrays: Número = " + numeros, 2);
+
+numeros.reverse();
+
+texto("(-) Array invertido: " + numeros, 2); // 5,4,3,2,1
+
+//////////////////////////////////
+// Ordenando un array (strings) //
+//////////////////////////////////
+
+var nombres = ["David","Miguel","Carlos","María","Bernardo","Ramón"];
+texto("(::) Ordenando el array = " + nombres, 2);
+
+nombres.sort();
+texto("(-) Array ordenado = " + nombres, 2);
+// Bernardo, Carlos, David, María, Miguel, Ramón
+
+////////////////////////////////////////////
+// Ordenando un array (números) - Erróneo //
+////////////////////////////////////////////
+
+texto("(::) Ordenamiento de números. En su forma básica, los números se ordenan mal", 2);
+
+var numeros = [3,1,2,100,4,200];
+texto("(-) Array original = " + numeros, 1);
+
+numeros.sort();
+texto("(-) Array ordenado = " + numeros, 2); // 1,100,2,200,3,4
+
+//////////////////////////////////////////////
+// Ordenando un array (números) - Corregido //
+//////////////////////////////////////////////
+
+// Se debe utilizar una función de comparación
+function comparar(num1, num2) {
+return num1 - num2;
+}
+
+texto("(::) Ordenamiento numérico corregido", 2);
+
+var numeros = [3,1,2,100,4,200];
+
+texto("(-) Array original = " + numeros, 1);
+
+numeros.sort(comparar);
+
+texto("(-) Array ordenado = " + numeros, 2);   // 1,2,3,4,100,200
+
+//////////////////////////////////
+// ITERADORES - Función forEach //
+//////////////////////////////////
+
+function cuadrado(numero) {
+    texto(numero.toString() + " --- " + (numero * numero), 1);
+}
+var numeros = [1,2,3,4,5,6,7,8,9,10];
+
+texto("(::) Cuadrados, utilizando forEach", 2);
+
+numeros.forEach(cuadrado);
+
+//////////////////////////////////
+// ITERADORES - Función every   //
+//////////////////////////////////
+
+function esPar(numero) {
+    return numero % 2 == 0;
+}
+
+var numeros = [2,4,6,8,10];
+var par = numeros.every(esPar);
+
+texto("(::) Detección números pares con el iterador: every", 2)
+
+if (par) {
+    texto("(-) Todos los números son de tipo par", 2);
+}
+else {
+    texto("(-) No todos los números son de tipo par", 2);
+}
+
+//////////////////////////////
+// ITERADORES: Función some //
+//////////////////////////////
+
+function esPar(numero) {
+    return numero % 2 == 0;
+}
+
+var numeros = [1,2,3,4,5,6,7,8,9,10];
+var algunoPar = numeros.some(esPar);
+
+texto("(::) Verificación de si algún número es par", 2)
+
+texto("(-) Array de números = " + numeros, 1);
+if (algunoPar) {
+    texto("(-) Algunos números son par", 2);
+}
+else {
+    texto("(-) Ningún número es par", 2);
+}
+numeros = [1,3,5,7,9];
+algunoPar = numeros.some(esPar);
+
+texto("(-) Array de números = " + numeros, 1);
+if (algunoPar) {
+    texto("(-) Algunos números son par", 2);
+}
+else {
+    texto("(-) Ningún número es par", 2);
+}
+
+////////////////////////////////
+// ITERADORES: Función reduce //
+////////////////////////////////
+
+function agregar(avance, valorActual) {
+    return avance + valorActual;
+}
+
+var numeros = [1,2,3,4,5,6,7,8,9,10];
+var suma = numeros.reduce(agregar);
+
+texto("(::) La función reduce genera un ciclo 'oculto'", 2);
+
+texto("(-) Array original = " + numeros, 1);
+texto("(-) Suma = " + suma, 2); // muestra 55
+
+/*
+CICLO OCULTO:
+
+agregar(1,2) -> 3
+agregar(3,3) -> 6
+agregar(6,4) -> 10
+agregar(10,5) -> 15
+agregar(15,6) -> 21
+agregar(21,7) -> 28
+agregar(28,8) -> 36
+agregar(36,9) -> 45
+agregar(45,10) -> 55
+
+*/
+
+/////////////////////////////////////////
+// ITERADORES: Función reduce - String //
+/////////////////////////////////////////
+
+function concatenar(stringAcumulado, elemento) {
+    return stringAcumulado + elemento;
+}
+
+texto("(::) Concatenación de cadenas utilizando 'reduce'", 2);
+
+var palabras = ["La ", "programación ","en ", "Javascript "];
+var frase = palabras.reduce(concatenar);
+
+texto("(-) Frase = " + frase, 2); // muestra "La programación en Javascript"
+
+///////////////////////////////////////////////////
+// ITERADORES: Función reduce - String (inverso) //
+///////////////////////////////////////////////////
+
+function concatenar(stringAcumulado, elemento) {
+    return stringAcumulado + elemento;
+}
+
+texto("(::) Concatenación de cadenas utilizando 'reduce', de Derecha a Izquierda", 2);
+
+var palabras = ["La ", "programación ","en ", "Javascript "];
+var frase = palabras.reduceRight(concatenar);
+
+texto("(-) Frase invertida = " + frase, 2); // muestra "La programación en Javascript"
+
+//////////////////////////////////////
+// ITERADORES que retornan un ARRAY //
+//////////////////////////////////////
+
+/////////////////////////////
+// ITERADORES: Función map //
+/////////////////////////////
+
+function curva(grado) {
+    return grado += 5;
+}
+
+var grados = [77, 65, 81, 92, 83];
+
+texto("(::) Utilización de la función 'map'", 2);
+
+texto("(-) Array original = " + grados, 1);
+
+var nuevos_grados = grados.map(curva);
+
+texto("(-) Nuevos grados = " + nuevos_grados, 2); // 82, 70, 86, 97, 88
+
+/////////////////////////////
+// ITERADORES: Función map //
+/////////////////////////////
+
+function primero(palabra) {
+    return palabra[0];
+}
+var palabras = ["para", "su", "información"];
+var acronimo = palabras.map(primero);
+
+texto("(::) Frase original = " + palabras, 2);
+
+texto("(-) Acrónimo = " + acronimo.join(""), 2); // muestra 'psi'
+
+////////////////////////////////
+// ITERADORES: Función filter //
+////////////////////////////////
+
+function esPar(numero) {
+    return numero % 2 == 0;
+}
+
+function esImpar(numero) {
+    return numero % 2 != 0;
+}
+
+var numeros = [];
+
+for (var i = 0; i < 20; ++i) {
+    numeros[i] = i + 1;
+}
+
+texto("(::) Detección de pares e impares con 'filter'", 2);
+
+texto("(-) Array = " + numeros, 2);
+
+var pares = numeros.filter(esPar);
+
+texto("(-) Números Pares: ", 1);
+
+texto(pares, 2);
+
+var impares = numeros.filter(esImpar);
+
+texto("(-) Números Impares: ", 1);
+texto(impares, 2);
+
+//////////////////////////////////////////////////
+// ITERADORES: Función filter - Otra aplicación //
+//////////////////////////////////////////////////
+
+function corte(numero) {
+    return numero >= 60;
+}
+var grados = [];
+
+for (var i = 0; i < 20; ++i) {
+    grados[i] = Math.floor(Math.random() * 101);
+}
+
+texto("(::) Fitro de grados mayores a 60", 2);
+
+texto("(-) Grados = " + grados, 2);
+
+var corteSuperior = grados.filter(corte);
+
+texto("(-) Corte Superior = ");
+texto(corteSuperior, 2);
+
+//////////////////////////////////////////////////
+// ITERADORES: Función filter - Otra aplicación //
+//////////////////////////////////////////////////
+
+function afterc(str) {
+    if (str.indexOf("cie") > -1) {
+        return true;
+    }
+    return false;
+}
+var palabras = ["recieve","deceive","percieve","deceit","concieve"];
+
+texto("(::) Detecta palabras mal escritas. En este caso, las que tengan las letras 'cie'", 2);
+
+texto("(-) Palabras origen: " + palabras, 1);
+
+var mal_escrito = palabras.filter(afterc);
+
+texto("(-) Palabras mal escritas = " + mal_escrito, 2); // muestra: recieve,percieve,concieve
+
+</script>
+</body>
+
+</html>
